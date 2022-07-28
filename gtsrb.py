@@ -32,7 +32,8 @@ def get_gtsrb_label(index):
 
 def plot_figure(image, path):
     fig = plt.figure()
-    ax = plt.Axes(fig, [0., 0., 1., 1.])
+    # ax = plt.Axes(fig, [0., 0., 1., 1.])
+    ax = plt.Axes(fig, [-0.5, -0.5, 1., 1.])
     ax.set_axis_off()
     fig.add_axes(ax)
     plt.imshow(image)
@@ -201,7 +202,8 @@ for pixel in inputVars:
         path = '%s/index-%d-%s-linf%g-explanation-%d-colour.png' % (
             result_dir, index, model_name, epsilon, len(sat_set)+len(timeout_set))
         plot_figure(label2rgb(mask.reshape(32, 32), x_test[index],
-                              colors=[[1, 1, 0]],
+                              # colors=[[1, 1, 0]],
+                              colors=[[0, 1, 0]],
                               bg_label=0,
                               saturation=1),
                     path)
@@ -216,7 +218,8 @@ for pixel in inputVars:
         path = '%s/index-%d-%s-linf%g-timeout-%d-colour.png' % (
             result_dir, index, model_name, epsilon, len(timeout_set))
         plot_figure(label2rgb(mask.reshape(32, 32), x_test[index],
-                              colors=[[1, 1, 0]],
+                              # colors=[[1, 1, 0]],
+                              colors=[[0, 1, 0]],
                               bg_label=0,
                               saturation=1),
                     path)
