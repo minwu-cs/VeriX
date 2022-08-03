@@ -125,6 +125,8 @@ path = '%s/index-%d-%s-sensitivity.png' % (
     result_dir, index, model_name)
 plot_figure(sensitivity, path)
 
+import random
+random.shuffle(inputVars)
 print(inputVars)
 
 
