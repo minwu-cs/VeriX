@@ -134,16 +134,6 @@ x_test = x_test.astype('float32') / 255
 # x_train /= 255
 # x_test /= 255
 
-# model = Sequential(name='mnist-10x3')
-# # model.add(Reshape(([784]), input_shape=(28, 28, 1)))
-# model.add(Flatten(name='input'))
-# model.add(Dense(10, name='dense_1'))
-# model.add(Activation('relu', name='relu_1'))
-# model.add(Dense(10, name='dense_2'))
-# model.add(Activation('relu', name='relu_2'))
-# model.add(Dense(10, name='logit'))
-# # model.add(Activation('softmax', name='output'))
-
 # model_name = 'mnist-10x2'
 # model = Sequential(name=model_name)
 # model.add(Flatten(name='input'))
