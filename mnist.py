@@ -26,14 +26,14 @@ def plot_figure(image, path, cmap=None):
     plt.close(fig)
 
 
-TIMEOUT = 30
+TIMEOUT = 60
 directory = 'rebuttal/'
 if not os.path.exists(directory):
     os.mkdir(directory)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='mnist')
-parser.add_argument('--network', type=str, default='mnist-10x3')
+parser.add_argument('--network', type=str, default='mnist-10x2')
 parser.add_argument('--index', type=int, default=0)
 parser.add_argument('--epsilon', type=float, default=0.1)
 args = parser.parse_args()
@@ -133,7 +133,7 @@ for pixel in inputVars:
                     network.setLowerBound(i, image[i])
                     network.setUpperBound(i, image[i])
             marabou_tick = time.time()
-            exitCode, vals, stats = network.solve(options=options)
+            exitCode, vals, stats = network.solve(options=options, verbose=False)
             marabou_toc = time.time()
             marabou_time.append(marabou_toc - marabou_tick)
             if exitCode == 'sat' or exitCode == 'TIMEOUT':
@@ -142,16 +142,16 @@ for pixel in inputVars:
                 continue
 
     if exitCode == 'unsat':
-        print('location %d returns unsat, move out.' % pixel)
+        # print('location %d returns unsat, move out.' % pixel)
         unsat_set.append(pixel)
-        print('current outside', unsat_set)
+        # print('current outside', unsat_set)
     elif exitCode == 'TIMEOUT':
-        print('timeout for pixel', pixel)
-        print('do not move out, continue to the next pixel')
+        # print('timeout for pixel', pixel)
+        # print('do not move out, continue to the next pixel')
         timeout_set.append(pixel)
     elif exitCode == 'sat':
-        print('perturbing current outside + this location %d alters prediction' % pixel)
-        print('do not move out, continue to the next pixel')
+        # print('perturbing current outside + this location %d alters prediction' % pixel)
+        # print('do not move out, continue to the next pixel')
         sat_set.append(pixel)
 
         # adversary = [vals.get(i) for i in inputVars] ???????
