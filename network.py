@@ -134,6 +134,16 @@ x_test = x_test.astype('float32') / 255
 # x_train /= 255
 # x_test /= 255
 
+# model = Sequential(name='mnist-10x3')
+# # model.add(Reshape(([784]), input_shape=(28, 28, 1)))
+# model.add(Flatten(name='input'))
+# model.add(Dense(10, name='dense_1'))
+# model.add(Activation('relu', name='relu_1'))
+# model.add(Dense(10, name='dense_2'))
+# model.add(Activation('relu', name='relu_2'))
+# model.add(Dense(10, name='logit'))
+# # model.add(Activation('softmax', name='output'))
+
 # model_name = 'mnist-10x2'
 # model = Sequential(name=model_name)
 # model.add(Flatten(name='input'))
@@ -144,21 +154,37 @@ x_test = x_test.astype('float32') / 255
 # model.add(Dense(10, name='logit'))
 # # model.add(Activation('softmax', name='output'))
 
-# model_name = 'mnist-100x2'
+model_name = 'mnist-30x2'
+model = Sequential(name=model_name)
+model.add(Flatten(name='input'))
+model.add(Dense(30, name='dense_1', activation='relu'))
+# model.add(Activation('relu', name='relu_1'))
+model.add(Dense(30, name='dense_2', activation='relu'))
+# model.add(Activation('relu', name='relu_2'))
+model.add(Dense(10, name='logit'))
+
+# model_name = 'mnist-cnn'
 # model = Sequential(name=model_name)
-# model.add(Flatten(name='input'))
-# model.add(Dense(100, name='dense_1', activation='relu'))
-# # model.add(Activation('relu', name='relu_1'))
-# model.add(Dense(100, name='dense_2', activation='relu'))
-# # model.add(Activation('relu', name='relu_2'))
+# model.add(Conv2D(4, (3, 3), name='conv_1', input_shape=(28, 28, 1)))
+# model.add(Conv2D(4, (3, 3), name='conv_2'))
+# model.add(Flatten())
+# model.add(Dense(20, activation='relu'))
 # model.add(Dense(10, name='logit'))
 
-model_name = 'mnist-cnn'
-model = Sequential(name=model_name)
-model.add(Conv2D(4, (3, 3), name='conv_1', activation='relu', input_shape=(28, 28, 1)))
-model.add(Conv2D(4, (3, 3), name='conv_2', activation='relu'))
-model.add(Flatten())
-model.add(Dense(10, name='logit'))
+# model_name = 'mnist-sota'
+# model = Sequential(name=model_name)
+# model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))
+# model.add(Conv2D(32, (3, 3), activation='relu'))
+# model.add(MaxPooling2D(pool_size=(2, 2)))
+# model.add(Conv2D(64, (3, 3), activation='relu'))
+# model.add(Conv2D(64, (3, 3), activation='relu'))
+# model.add(MaxPooling2D(pool_size=(2, 2)))
+# model.add(Flatten())
+# model.add(Dense(200, activation='relu'))
+# model.add(Dropout(0.5))
+# model.add(Dense(200, activation='relu'))
+# model.add(Dense(10, name='logit'))
+
 
 # model = Sequential()
 # model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(28,28,1)))
