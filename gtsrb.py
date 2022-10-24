@@ -182,7 +182,7 @@ for pixel in inputVars:
         print('do not move out, continue to the next pixel')
         sat_set.append(pixel)
 
-        # adversary = [vals.get(i) for i in inputVars] ???????
+        # adversary = [vals.get(i) for i in inputVars]
         adversary = [vals.get(i) for i in mara_network.inputVars[0][0].flatten()]
         adversary = np.asarray(adversary).reshape(32, 32, 3)
         adv_predictions = [vals.get(i) for i in outputVars]

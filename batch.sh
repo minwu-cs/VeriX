@@ -6,13 +6,13 @@ echo "Bash version ${BASH_VERSION}..."
 #  for e in $(seq 0.1 0.1 1)
 #  for e in $(seq 0.01 0.01 0.09)
 #  for e in $(seq 1)
-model=("mnist-10x2" "mnist-100x2" "mnist-cnn")
-epsilon=(0.05 0.1 0.5)
+model=("mnist-10x2" "mnist-50x2" "mnist-cnn")
+epsilon=(0.05)
 for m in "${model[@]}"
 do
   for e in "${epsilon[@]}"
   do
-    for i in $(seq 0 1 9)
+    for i in $(seq 0 1 49)
     do
 #      echo "$m", "$e", "$i"
       python mnist.py --network="$m" --epsilon="$e" --index="$i"
