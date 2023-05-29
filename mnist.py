@@ -80,6 +80,8 @@ if label != y[index].argmax():
     print("Wrong prediction. Pass")
     exit()
 
+explanation_tick = time.time()
+
 # heuristic: get traverse order by pixel sensitivity
 temp = x[index].reshape(28*28)
 image_batch = np.kron(np.ones((28*28, 1)), temp)
@@ -114,7 +116,6 @@ sat_set = []
 timeout_set = []
 
 marabou_time = []
-explanation_tick = time.time()
 for pixel in inputVars:
     for j in range(10):
         if j != label:
@@ -165,8 +166,9 @@ for pixel in inputVars:
         #                  (result_dir, index, pixel, prediction),
         #             cmap='gray')
 
-    explanation_toc = time.time()
     if pixel == inputVars[-1]:
+        explanation_toc = time.time()
+        
         mask = np.zeros(image.shape).astype(bool)
         # mask[unsat_set] = 1
         mask[sat_set] = True
