@@ -33,8 +33,8 @@ if not os.path.exists(directory):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='mnist')
-parser.add_argument('--network', type=str, default='mnist-10x2')
-parser.add_argument('--index', type=int, default=0)
+parser.add_argument('--network', type=str, default='mnist-100x2')
+parser.add_argument('--index', type=int, default=1)
 parser.add_argument('--epsilon', type=float, default=0.1)
 args = parser.parse_args()
 
@@ -43,7 +43,7 @@ model_name = args.network
 index = args.index
 epsilon = args.epsilon
 
-result_dir = directory + 'index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, TIMEOUT, epsilon)
+result_dir = 'results/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, TIMEOUT, epsilon)
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
@@ -105,7 +105,7 @@ mara_network = Marabou.read_onnx(onnx_model_path)
 options = Marabou.createOptions(numWorkers=16, timeoutInSeconds=TIMEOUT, verbosity=0)
 
 inputVars = mara_network.inputVars[0][0].flatten()
-outputVars = mara_network.outputVars.flatten()
+outputVars = mara_network.outputVars[0].flatten()
 inputVars = sorted_index
 # print(inputVars)
 
