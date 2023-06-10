@@ -168,7 +168,7 @@ for pixel in inputVars:
 
     if pixel == inputVars[-1]:
         explanation_toc = time.time()
-        
+
         mask = np.zeros(image.shape).astype(bool)
         # mask[unsat_set] = 1
         mask[sat_set] = True
