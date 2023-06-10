@@ -13,7 +13,7 @@ import tf2onnx
 # import pickle
 # with open('GTSRB/train.p', 'rb') as f:
 #     gtsrb_train = pickle.load(f)
-# with open('GTSRB/valid.p', 'rb') as f:
+# with open('GTSRB/valid.pCS 243', 'rb') as f:
 #     gtsrb_valid = pickle.load(f)
 # with open('GTSRB/test.p', 'rb') as f:
 #     gtsrb_test = pickle.load(f)
@@ -218,7 +218,7 @@ print("Test accuracy:", score[1])
 model.summary()
 # model.save('mnist-10x2.h5')
 model.save(model_name + '.h5')
-model_proto, _ = tf2onnx.convert.from_keras(model, output_path=model_name + '.onnx')
+model_proto, _ = tf2onnx.convert.from_keras(model, output_path='models/' + model_name + '.onnx')
 
 
 

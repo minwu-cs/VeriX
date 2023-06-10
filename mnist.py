@@ -27,7 +27,7 @@ def plot_figure(image, path, cmap=None):
 
 
 TIMEOUT = 60
-directory = 'rebuttal/'
+directory = 'outputs/'
 if not os.path.exists(directory):
     os.mkdir(directory)
 
