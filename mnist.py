@@ -27,7 +27,7 @@ def plot_figure(image, path, cmap=None):
 
 
 TIMEOUT = 60
-directory = 'outputs/'
+directory = 'models/'
 if not os.path.exists(directory):
     os.mkdir(directory)
 
@@ -43,7 +43,7 @@ model_name = args.network
 index = args.index
 epsilon = args.epsilon
 
-result_dir = 'results/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, TIMEOUT, epsilon)
+result_dir = 'outputs/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, TIMEOUT, epsilon)
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 

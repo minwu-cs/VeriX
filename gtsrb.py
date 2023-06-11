@@ -51,7 +51,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='gtsrb')
 parser.add_argument('--network', type=str, default='gtsrb-10x2')
 parser.add_argument('--index', type=int, default=0)
-parser.add_argument('--epsilon', type=float, default=0.01)
+parser.add_argument('--epsilon', type=float, default=0.1)
 parser.add_argument('--traverse', type=str, default='heuristic')
 parser.add_argument('--seed', type=int, default=0)
 args = parser.parse_args()
@@ -65,10 +65,10 @@ seed = args.seed
 
 
 if traverse == 'heuristic':
-    result_dir = 'index-%d-%s-%ds-%s-linf%g' % (
+    result_dir = 'gtsrb_outputs/index-%d-%s-%ds-%s-linf%g' % (
         index, model_name, TIMEOUT, traverse, epsilon)
 elif traverse == 'random':
-    result_dir = 'index-%d-%s-%ds-%s-seed-%d-linf%g' % (
+    result_dir = 'gtsrb_outputs/index-%d-%s-%ds-%s-seed-%d-linf%g' % (
         index, model_name, TIMEOUT, traverse, seed, epsilon)
 else:
     print('traversal incorrect.')
@@ -77,7 +77,7 @@ else:
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
-gtsrb_path = 'GTSRB/gtsrb.pickle'
+gtsrb_path = 'models/gtsrb.pickle'
 x_test, y_test = load_gtsrb(gtsrb_path=gtsrb_path)
 
 from keras.models import load_model
@@ -117,13 +117,13 @@ if orig_label is not pred_label:
 onnx_model_path = 'models/' + model_name + '.onnx'
 # mara_network = Marabou.read_onnx(onnx_model_path)
 mara_network = Marabou.read_onnx(onnx_model_path,
-                                 outputName=model_name + '/logit/BiasAdd:0')
+                                 outputNames=model_name + '/logit/BiasAdd:0')
 options = Marabou.createOptions(numWorkers=16, timeoutInSeconds=TIMEOUT, verbosity=0, solveWithMILP=True)
 
 # inputVars = mara_network.inputVars[0][0].flatten() # channel causes error
 # outputVars = mara_network.outputVars.flatten()
 inputVars = np.arange(32*32)
-outputVars = mara_network.outputVars.flatten()
+outputVars = mara_network.outputVars[0].flatten()
 
 if traverse == 'heuristic':
     saliency_tic = time.time()
@@ -154,8 +154,6 @@ if traverse == 'heuristic':
         result_dir, index, model_name)
     plot_figure(sensitivity, path)
 
-    exit()
-
     saliency_toc = time.time()
     saliency_time = saliency_toc - saliency_tic
 
@@ -175,13 +173,13 @@ image = image.reshape(32*32, 3)
 unsat_set = []
 sat_set = []
 timeout_set = []
-
+'''
 MIN_EPS = args.epsilon
 robust = True
 for j in range(10):
     if j != label:
         network = Marabou.read_onnx(onnx_model_path,
-                                    outputName=model_name + '/logit/BiasAdd:0')
+                                    outputNames=model_name + '/logit/BiasAdd:0')
         network.addInequality([outputVars[label], outputVars[j]],
                               [1, -1], -1e-6)
 
@@ -210,12 +208,13 @@ if robust:
 # network = Marabou.read_onnx(onnx_model_path,
 #                             outputNames=[model_name + '/logit/BiasAdd:0'])
 
-
+'''
 marabou_time = []
 explanation_tick = time.time()
-
+progress = 0
 for pixel in inputVars:
-    # print("current pixel: ", pixel)
+    progress += 1
+    print("checked", progress, "pixels")
     p_path = '%s/index-%d-pixel-%d.txt' % (result_dir, index, pixel)
 
     cached = False
@@ -226,7 +225,7 @@ for pixel in inputVars:
         for j in range(10):
             if j != label:
                 network = Marabou.read_onnx(onnx_model_path,
-                                            outputName=model_name + '/logit/BiasAdd:0')
+                                            outputNames=model_name + '/logit/BiasAdd:0')
 
                 # network.addInequality([outputVars[label], outputVars[j]],
                 #                       [1, -1], -1e-6, isProperty=True)
@@ -259,19 +258,19 @@ for pixel in inputVars:
                     break
                 elif exitCode == 'unsat':
                     continue
-        with open(p_path, 'w') as out_file:
-            out_file.write(exitCode)
+        # with open(p_path, 'w') as out_file:
+        #     out_file.write(exitCode)
     
     if exitCode == 'unsat':
-        # print('location %d returns unsat, move out.' % pixel)
+        print('location %d returns unsat, move out.' % pixel)
         unsat_set.append(pixel)
         # print('current outside', unsat_set)
     elif exitCode == 'TIMEOUT':
-        # print('timeout for pixel', pixel)
+        print('timeout for pixel', pixel)
         # print('do not move out, continue to the next pixel')
         timeout_set.append(pixel)
     elif exitCode == 'sat':
-        # print('perturbing current outside + this location %d alters prediction' % pixel)
+        print('perturbing current outside + this location %d alters prediction' % pixel)
         # print('do not move out, continue to the next pixel')
         sat_set.append(pixel)
 
@@ -345,15 +344,15 @@ if traverse == "heuristic":
 elif traverse == "random":
     explanation_time = explanation_toc - explanation_tick
 
-marabou_time_text = '%s-%ds-%s-linf%g-marabou-time.txt' % (model_name, TIMEOUT, traverse, epsilon)
+marabou_time_text = '%s/%s-%ds-%s-linf%g-marabou-time.txt' % (result_dir, model_name, TIMEOUT, traverse, epsilon)
 with open(marabou_time_text, 'a') as f:
     f.write(str(marabou_time) + '\n')
 
-explanation_time_text = '%s-%ds-%s-linf%g-explanation-time.txt' % (model_name, TIMEOUT, traverse, epsilon)
+explanation_time_text = '%s/%s-%ds-%s-linf%g-explanation-time.txt' % (result_dir, model_name, TIMEOUT, traverse, epsilon)
 with open(explanation_time_text, 'a') as f:
     f.write(str(explanation_time) + '\n')
 
-explanation_size_text = '%s-%ds-%s-linf%g-explanation-size.txt' % (model_name, TIMEOUT, traverse, epsilon)
+explanation_size_text = '%s/%s-%ds-%s-linf%g-explanation-size.txt' % (result_dir, model_name, TIMEOUT, traverse, epsilon)
 with open(explanation_size_text, 'a') as f:
     f.write(str(len(sat_set)+len(timeout_set)) + '\n')
 
