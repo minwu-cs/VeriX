@@ -1,0 +1,2 @@
+zsh: parse error near `&'
+zsh: command not found: dsfasdfasf

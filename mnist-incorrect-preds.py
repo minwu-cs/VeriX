@@ -10,7 +10,7 @@ from keras.models import load_model
 from skimage.color import label2rgb
 import matplotlib.pyplot as plt
 from maraboupy import Marabou
-
+from utils import suppress_stdout
 
 def plot_figure(image, path, cmap=None):
     fig = plt.figure()
@@ -73,7 +73,7 @@ for index in range(len(x_test)):
     print('%d predicted as %d', correct_pred, label)
 
     if label == y[index].argmax():
-        print("Correct prediction. Pass")
+        print("Correct prediction. Continue.")
         continue
     print("Wrong prediction. Generate explanation.")
 
@@ -139,7 +139,8 @@ for index in range(len(x_test)):
                         network.setLowerBound(i, image[i])
                         network.setUpperBound(i, image[i])
                 marabou_tick = time.time()
-                exitCode, vals, stats = network.solve(options=options, verbose=False)
+                with suppress_stdout():
+                    exitCode, vals, stats = network.solve(options=options, verbose=False)
                 marabou_toc = time.time()
                 marabou_time.append(marabou_toc - marabou_tick)
                 if exitCode == 'sat' or exitCode == 'TIMEOUT':

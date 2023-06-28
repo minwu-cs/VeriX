@@ -10,7 +10,7 @@ from keras.models import load_model
 from skimage.color import label2rgb
 import matplotlib.pyplot as plt
 from maraboupy import Marabou
-
+from utils import suppress_stdout
 
 def plot_figure(image, path, cmap=None):
     fig = plt.figure()
@@ -33,8 +33,8 @@ if not os.path.exists(directory):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='mnist')
-parser.add_argument('--network', type=str, default='mnist-100x2')
-parser.add_argument('--index', type=int, default=1)
+parser.add_argument('--network', type=str, default='mnist-10x2')
+parser.add_argument('--index', type=int, default=0)
 parser.add_argument('--epsilon', type=float, default=0.1)
 args = parser.parse_args()
 
@@ -134,7 +134,10 @@ for pixel in inputVars:
                     network.setLowerBound(i, image[i])
                     network.setUpperBound(i, image[i])
             marabou_tick = time.time()
-            exitCode, vals, stats = network.solve(options=options, verbose=False)
+
+            with suppress_stdout():
+                exitCode, vals, stats = network.solve(options=options, verbose=False)
+
             marabou_toc = time.time()
             marabou_time.append(marabou_toc - marabou_tick)
             if exitCode == 'sat' or exitCode == 'TIMEOUT':
