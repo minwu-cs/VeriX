@@ -3,6 +3,7 @@ import ctypes
 import io
 import os, sys
 import tempfile
+import matplotlib.pyplot as plt
 
 libc = ctypes.CDLL(None)
 c_stdout = ctypes.c_void_p.in_dll(libc, '__stdoutp')
@@ -39,3 +40,18 @@ def suppress_stdout():
     finally:
         tfile.close()
         os.close(saved_stdout_fd)
+
+
+def plot_figure(image, path, cmap=None):
+    fig = plt.figure()
+    # ax = plt.Axes(fig, [0., 0., 1., 1.])
+    ax = plt.Axes(fig, [-0.5, -0.5, 1., 1.])
+    ax.set_axis_off()
+    fig.add_axes(ax)
+    if cmap is None:
+        plt.imshow(image)
+    else:
+        plt.imshow(image, cmap=cmap)
+    plt.savefig(path, bbox_inches='tight')
+    plt.close(fig)
+

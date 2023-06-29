@@ -1,5 +1,4 @@
 import os
-import time
 import random
 import argparse
 import numpy as np
@@ -29,29 +28,30 @@ x = x_test[indices]
 y = y_test[indices]
 
 # Load pre-trained networks
-
-# keras_model_path = directory + model_name + '.h5'
-# keras_model = load_model(keras_model_path)
-# keras_model.summary()
-# score = keras_model.evaluate(x, y, verbose=0)
-# print("Test loss:", score[0])
-# print("Test accuracy:", score[1])
-
 networks_path = 'networks/'
 h5_models = []
-for file in os.listdir(networks_path):
-    if file.startswith('mnist'):
-        if file.endswith('.h5'):
-            keras_model_path = networks_path + file
-            keras_model = load_model(keras_model_path)
-            keras_model.summary()
-            score = keras_model.evaluate(x_test, y_test, verbose=0)
-            h5_models.append(keras_model)
-            print("Test loss:", score[0])
-            print("Test accuracy:", score[1])
-            print("Loaded model", keras_model.name)
-            print('*'*60, '\n')
+mara_networks = []
+for filename in os.listdir(networks_path):
+    if filename.startswith('mnist') and filename.endswith('.h5'):
+        onnx_path = networks_path + filename[:-3] + '.onnx'
+        if not os.path.exists(onnx_path):
+            continue
+        keras_model_path = networks_path + filename
+        keras_model = load_model(keras_model_path)
+        keras_model.summary()
+        score = keras_model.evaluate(x_test, y_test, verbose=0)
+        print("Test loss:", score[0])
+        print("Test accuracy:", score[1])
+        print("Loaded model", keras_model.name)
+        print('*'*60, '\n')
+        h5_models.append(keras_model)
+        mara_networks.append(Marabou.read_onnx(onnx_path))
 
 # For each network, produce explanations on the set of images
+for model in range(len(h5_models)):
+    for index in indices:
+        # Create traversal order
+        pass
+        # Produce explanations
 
 # Visualization

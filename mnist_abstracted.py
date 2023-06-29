@@ -11,25 +11,13 @@ from skimage.color import label2rgb
 import matplotlib.pyplot as plt
 from maraboupy import Marabou
 from utils import suppress_stdout, plot_figure
+from verix import VeriX
+
 
 TIMEOUT = 60
 directory = 'models/'
 if not os.path.exists(directory):
     os.mkdir(directory)
-
-def plot_figure(image, path, cmap=None):
-    fig = plt.figure()
-    # ax = plt.Axes(fig, [0., 0., 1., 1.])
-    ax = plt.Axes(fig, [-0.5, -0.5, 1., 1.])
-    ax.set_axis_off()
-    fig.add_axes(ax)
-    if cmap is None:
-        plt.imshow(image)
-    else:
-        plt.imshow(image, cmap=cmap)
-    plt.savefig(path, bbox_inches='tight')
-    plt.close(fig)
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='mnist')
@@ -58,47 +46,15 @@ x = x_test
 y = y_test
 
 keras_model_path = directory + model_name + '.h5'
-keras_model = load_model(keras_model_path)
-keras_model.summary()
-# keras_model.compile(loss=tfr.keras.losses.SoftmaxLoss(),
-#                     optimizer=tf.keras.optimizers.Adam(),
-#                     metrics=['accuracy'])
-score = keras_model.evaluate(x, y, verbose=0)
-print("Test loss:", score[0])
-print("Test accuracy:", score[1])
 
-logits = keras_model.predict(np.expand_dims(x[index], axis=0))
-label = logits.argmax()
-print(logits)
-print(label)
+solver = VeriX(keras_model_path, x[index], y[index])
+test = solver.get_pixel_sensitivities(transformation=lambda a: 1 - a, plot_path='%s/index-%d-%s-sensitivity.png' %
+                                                                        (result_dir, index, model_name))
 
-plot_figure(image=x[index],
-            path='%s/index-%d-original-predicted-as-%d.png' % (result_dir, index, label),
-            cmap='gray')
+# solver.add_traversal_order('sensitivity', sorted_index)
 
-if label != y[index].argmax():
-    print("Wrong prediction. Pass")
-    exit()
+exit()
 
-explanation_tick = time.time()
-
-# heuristic: get traverse order by pixel sensitivity
-temp = x[index].reshape(28*28)
-image_batch = np.kron(np.ones((28*28, 1)), temp)
-image_batch_manipulated = image_batch.copy()
-for i in range(28*28):
-    image_batch_manipulated[i][i] = 1 - image_batch_manipulated[i][i]
-    # image_batch_manipulated[i][i] = 0
-predictions = keras_model.predict(image_batch.reshape(784, 28, 28, 1))
-predictions_manipulated = keras_model.predict(image_batch_manipulated.reshape(784, 28, 28, 1))
-difference = predictions - predictions_manipulated
-features = difference[:, label]
-sorted_index = features.argsort()
-# inputVars = sorted_index
-
-sensitivity = features.reshape([28, 28])
-plot_figure(image=sensitivity,
-            path='%s/index-%d-%s-sensitivity.png' % (result_dir, index, model_name))
 
 onnx_model_path = directory + model_name + '.onnx'
 mara_network = Marabou.read_onnx(onnx_model_path)
