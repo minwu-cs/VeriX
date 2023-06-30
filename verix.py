@@ -8,25 +8,25 @@ from maraboupy import Marabou
 from utils import suppress_stdout, plot_figure
 import warnings
 
-# TODO: Add visualizations
-# TODO: Add support for storing adversary
+# TODO: add support for adversary
 
 class VeriX:
-    def __init__(self, network, x, y, loss=tfr.keras.losses.SoftmaxLoss(), optimizer=tf.keras.optimizers.Adam(),
+    def __init__(self, network_path, x, y, loss=tfr.keras.losses.SoftmaxLoss(), optimizer=tf.keras.optimizers.Adam(),
                  metrics=None, seed=137):
         """
-        :param network: path to the .h5 network
+        Initializes solver object and prints a summary of keras model loaded
+        :param network_path: path to the .h5 network
         :param x: input image
         :param y: correct prediction class label
         """
         # Should actually convert from h5 to onnx here, but I have trouble using tf2onnx on M1 mac,
         # so I will instead try to find an onnx model with the same name under the same path as the h5 model
-        self.onnx_path = network[:-3] + '.onnx'
+        self.onnx_path = network_path[:-3] + '.onnx'
         if not os.path.exists(self.onnx_path):
             raise Exception("onnx model not found")
         if metrics is None:
             metrics = ['accuracy']
-        self.keras_model = load_model(network)
+        self.keras_model = load_model(network_path)
         self.keras_model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
         self.keras_model.summary()
         self.mara_network = Marabou.read_onnx(self.onnx_path)

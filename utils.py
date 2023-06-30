@@ -4,9 +4,12 @@ import io
 import os, sys
 import tempfile
 import matplotlib.pyplot as plt
+import numpy as np
+from skimage.color import label2rgb
 
 libc = ctypes.CDLL(None)
 c_stdout = ctypes.c_void_p.in_dll(libc, '__stdoutp')
+
 
 @contextmanager
 def suppress_stdout():
@@ -44,7 +47,6 @@ def suppress_stdout():
 
 def plot_figure(image, path, cmap=None):
     fig = plt.figure()
-    # ax = plt.Axes(fig, [0., 0., 1., 1.])
     ax = plt.Axes(fig, [-0.5, -0.5, 1., 1.])
     ax.set_axis_off()
     fig.add_axes(ax)
@@ -55,3 +57,11 @@ def plot_figure(image, path, cmap=None):
     plt.savefig(path, bbox_inches='tight')
     plt.close(fig)
 
+
+def plot_mask(image, pixels, path, cmap=None, alpha=0.3, color=None, bg_label=0, bg_color=(0, 0, 0)):
+    color = [0, 1, 0] if color is None else color
+    mask = np.zeros(image.shape[0] * image.shape[1]).astype(bool)
+    mask[pixels] = True
+    mask = mask.reshape((image.shape[0], image.shape[1]))
+    image = label2rgb(mask, image, alpha=alpha, colors=[color], bg_label=bg_label, bg_color=bg_color)
+    plot_figure(image=image, path=path, cmap=cmap)

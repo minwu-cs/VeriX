@@ -1,0 +1,3 @@
+sat set size: 310
+unsat set size: 474
+timeout set size: 0
