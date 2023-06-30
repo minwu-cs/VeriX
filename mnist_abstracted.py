@@ -24,6 +24,7 @@ parser.add_argument('--dataset', type=str, default='mnist')
 parser.add_argument('--network', type=str, default='mnist-10x2')
 parser.add_argument('--index', type=int, default=0)
 parser.add_argument('--epsilon', type=float, default=0.1)
+parser.add_argument('--verbosity', type=bool, default=False)
 args = parser.parse_args()
 
 dataset = args.dataset
@@ -31,7 +32,7 @@ model_name = args.network
 index = args.index
 epsilon = args.epsilon
 
-result_dir = 'outputs/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, TIMEOUT, epsilon)
+result_dir = 'outputs/index-%d-%s-%ds-heuristic-linf%g-test' % (index, model_name, TIMEOUT, epsilon)
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
@@ -46,132 +47,37 @@ x = x_test
 y = y_test
 
 keras_model_path = directory + model_name + '.h5'
-
 solver = VeriX(keras_model_path, x[index], y[index])
-test = solver.get_pixel_sensitivities(transformation=lambda a: 1 - a, plot_path='%s/index-%d-%s-sensitivity.png' %
-                                                                        (result_dir, index, model_name))
+solver.add_traversal_order('sensitivity_reversal')
+sat_set, unsat_set, timeout_set = solver.generate_explanation('sensitivity_reversal', epsilon, verbosity=args.verbosity)
 
-# solver.add_traversal_order('sensitivity', sorted_index)
+image = x[solver.pred].flatten()
+mask = np.zeros(image.shape).astype(bool)
+mask[sat_set] = True
+mask[timeout_set] = True
 
-exit()
+plot_figure(image=label2rgb(mask.reshape(28, 28), x[index].reshape(28, 28),
+                            # colors=[[1, 1, 0]],
+                            # colors=[[128 / 255, 1, 0]],
+                            colors=[[0, 1, 0]],
+                            bg_label=0),
+            path='%s/index-%d-%s-linf%g-explanation-%d.png' %
+                 (result_dir, index, model_name, epsilon, len(sat_set)+len(timeout_set)))
 
+mask = np.zeros(image.shape).astype(bool)
+mask[timeout_set] = True
 
-onnx_model_path = directory + model_name + '.onnx'
-mara_network = Marabou.read_onnx(onnx_model_path)
-options = Marabou.createOptions(numWorkers=16, timeoutInSeconds=TIMEOUT, verbosity=0)
+plot_figure(image=label2rgb(mask.reshape(28, 28), x[index].reshape(28, 28),
+                            # colors=[[1, 1, 0]],
+                            # colors=[[128 / 255, 1, 0]],
+                            colors=[[0, 1, 0]],
+                            bg_label=0),
+            path='%s/index-%d-%s-linf%g-timeout-%d.png' %
+                 (result_dir, index, model_name, epsilon, len(timeout_set)))
 
-inputVars = mara_network.inputVars[0][0].flatten()
-outputVars = mara_network.outputVars[0].flatten()
-inputVars = sorted_index
-# print(inputVars)
-
-image = x[index].flatten()
-
-unsat_set = []
-sat_set = []
-timeout_set = []
-
-marabou_time = []
-for pixel in inputVars:
-    for j in range(10):
-        if j != label:
-            network = Marabou.read_onnx(onnx_model_path)
-            network.addInequality([outputVars[label], outputVars[j]],
-                                  [1, -1], -1e-6)
-            # network.addInequality([outputVars[label], outputVars[j]],
-            #                       [1, -1], 0)
-            for i in inputVars:
-                if i == pixel or i in unsat_set:
-                    # network.setLowerBound(i, 0)
-                    # network.setUpperBound(i, 1)
-                    network.setLowerBound(i, max(0, image[i] - epsilon))
-                    network.setUpperBound(i, min(1, image[i] + epsilon))
-                else:
-                    network.setLowerBound(i, image[i])
-                    network.setUpperBound(i, image[i])
-            marabou_tick = time.time()
-
-            with suppress_stdout():
-                exitCode, vals, stats = network.solve(options=options, verbose=False)
-
-            marabou_toc = time.time()
-            marabou_time.append(marabou_toc - marabou_tick)
-            if exitCode == 'sat' or exitCode == 'TIMEOUT':
-                break
-            elif exitCode == 'unsat':
-                continue
-
-    if exitCode == 'unsat':
-        # print('location %d returns unsat, move out.' % pixel)
-        unsat_set.append(pixel)
-        # print('current outside', unsat_set)
-    elif exitCode == 'TIMEOUT':
-        # print('timeout for pixel', pixel)
-        # print('do not move out, continue to the next pixel')
-        timeout_set.append(pixel)
-    elif exitCode == 'sat':
-        # print('perturbing current outside + this location %d alters prediction' % pixel)
-        # print('do not move out, continue to the next pixel')
-        sat_set.append(pixel)
-
-        # adversary = [vals.get(i) for i in inputVars] ???????
-        adversary = [vals.get(i) for i in mara_network.inputVars[0][0].flatten()]
-        adversary = np.asarray(adversary).reshape(28, 28)
-        prediction = [vals.get(i) for i in outputVars]
-        prediction = np.asarray(prediction).argmax()
-
-        # plot_figure(image=adversary,
-        #             path='%s/index-%d-adversary-sat-pixel-%d-predicted-as-%d.png' %
-        #                  (result_dir, index, pixel, prediction),
-        #             cmap='gray')
-
-    if pixel == inputVars[-1]:
-        explanation_toc = time.time()
-
-        mask = np.zeros(image.shape).astype(bool)
-        # mask[unsat_set] = 1
-        mask[sat_set] = True
-        mask[timeout_set] = True
-        # mask = mask.astype('int')
-
-        plot_figure(image=label2rgb(mask.reshape(28, 28), x[index].reshape(28, 28),
-                                    # colors=[[1, 1, 0]],
-                                    # colors=[[128 / 255, 1, 0]],
-                                    colors=[[0, 1, 0]],
-                                    bg_label=0),
-                    path='%s/index-%d-%s-linf%g-explanation-%d.png' %
-                         (result_dir, index, model_name, epsilon, len(sat_set)+len(timeout_set)))
-
-        mask = np.zeros(image.shape).astype(bool)
-        mask[timeout_set] = True
-        # mask = mask.astype('int')
-
-        plot_figure(image=label2rgb(mask.reshape(28, 28), x[index].reshape(28, 28),
-                                    # colors=[[1, 1, 0]],
-                                    # colors=[[128 / 255, 1, 0]],
-                                    colors=[[0, 1, 0]],
-                                    bg_label=0),
-                    path='%s/index-%d-%s-linf%g-timeout-%d.png' %
-                         (result_dir, index, model_name, epsilon, len(timeout_set)))
-
-        np.savetxt('%s/index-%d-%s-linf%g-unsat.txt' % (result_dir, index, model_name, epsilon),
-                   unsat_set, fmt='%d')
-        np.savetxt('%s/index-%d-%s-linf%g-sat.txt' % (result_dir, index, model_name, epsilon),
-                   sat_set, fmt='%d')
-        np.savetxt('%s/index-%d-%s-linf%g-timeout.txt' % (result_dir, index, model_name, epsilon),
-                   timeout_set, fmt='%d')
-
-marabou_time = np.asarray(marabou_time)
-marabou_time = np.mean(marabou_time)
-explanation_time = explanation_toc - explanation_tick
-
-marabou_time_text = directory + '%s-%ds-heuristic-linf%g-marabou-time.txt' % (model_name, TIMEOUT, epsilon)
-with open(marabou_time_text, 'a') as f:
-    f.write(str(marabou_time) + '\n')
-
-explanation_time_text = directory + '%s-%ds-heuristic-linf%g-explanation-time.txt' % (model_name, TIMEOUT, epsilon)
-with open(explanation_time_text, 'a') as f:
-    f.write(str(explanation_time) + '\n')
-
-print('explanation generated.')
-
+np.savetxt('%s/index-%d-%s-linf%g-unsat.txt' % (result_dir, index, model_name, epsilon),
+           unsat_set, fmt='%d')
+np.savetxt('%s/index-%d-%s-linf%g-sat.txt' % (result_dir, index, model_name, epsilon),
+           sat_set, fmt='%d')
+np.savetxt('%s/index-%d-%s-linf%g-timeout.txt' % (result_dir, index, model_name, epsilon),
+           timeout_set, fmt='%d')
