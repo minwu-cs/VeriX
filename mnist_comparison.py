@@ -60,7 +60,7 @@ for model_index in range(num_models):
         original_image = x_test[sample_index]
         original_label = y_test[sample_index].argmax()
         result_sub_path = result_path + '%s-index-%d/' % (model_name, sample_index)
-
+ 
         test = args.test
         # in testing mode, read pre-stored explanation sets instead of actually generating explanations
 
