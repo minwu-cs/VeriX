@@ -7,6 +7,7 @@ from keras.datasets import mnist
 import matplotlib.pyplot as plt
 from utils import plot_figure, plot_mask
 from verix import VeriX
+import pickle
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--num_samples', type=int, default=5)
@@ -51,16 +52,18 @@ for filename in os.listdir(networks_path):
         model_names.append(filename[:-3])
 
 # For each network, produce explanations on the set of images
+results = {}
 num_models = len(keras_models)
 fig, axes = plt.subplots(num_samples, num_models)
 for model_index in range(num_models):
     model_name = model_names[model_index]
+    results[model_name] = {}
     for i in range(len(sample_indices)):
         sample_index = sample_indices[i]
         original_image = x_test[sample_index]
         original_label = y_test[sample_index].argmax()
         result_sub_path = result_path + '%s-index-%d/' % (model_name, sample_index)
- 
+
         test = args.test
         # in testing mode, read pre-stored explanation sets instead of actually generating explanations
 
@@ -79,6 +82,7 @@ for model_index in range(num_models):
                 load_path + 'index-%d-%s-linf%g-unsat.txt' % (0, model_names[2], epsilon), dtype=int)
             timeout_set = np.loadtxt(
                 load_path + 'index-%d-%s-linf%g-timeout.txt' % (0, model_names[2], epsilon), dtype=int)
+        results[model_name][sample_index] = (sat_set, unsat_set, timeout_set)
 
         if not os.path.exists(result_sub_path):
             os.mkdir(result_sub_path)
@@ -121,6 +125,11 @@ for model_index in range(num_models):
         ax.axis('off')
         ax.imshow(masked_image, interpolation='nearest')
 
+# save results in the same place
+with open('results.pickle', 'wb') as f:
+    pickle.dump(results, f)
+
+# plot summary image
 # row names
 for i in range(num_samples):
     fig.text(0.03, 0.03 + (i + 0.5) / num_samples * 0.95, f'{sample_indices[i]}',
