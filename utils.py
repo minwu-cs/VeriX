@@ -50,10 +50,7 @@ def plot_figure(image, path, cmap=None):
     ax = plt.Axes(fig, [-0.5, -0.5, 1., 1.])
     ax.set_axis_off()
     fig.add_axes(ax)
-    if cmap is None:
-        plt.imshow(image)
-    else:
-        plt.imshow(image, cmap=cmap)
+    plt.imshow(image, cmap=cmap)
     plt.savefig(path, bbox_inches='tight')
     plt.close(fig)
 
@@ -65,3 +62,4 @@ def plot_mask(image, pixels, path, cmap=None, alpha=0.3, color=None, bg_label=0,
     mask = mask.reshape((image.shape[0], image.shape[1]))
     image = label2rgb(mask, image, alpha=alpha, colors=[color], bg_label=bg_label, bg_color=bg_color)
     plot_figure(image=image, path=path, cmap=cmap)
+    return image

@@ -1,29 +1,41 @@
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 
-# Define the number of rows and columns in the grid
-num_rows = 3
-num_cols = 4
+# Create a grid of subplots
+fig = plt.figure(figsize=(8, 6))
+gs = gridspec.GridSpec(3, 3)
 
-# Create the grid of subplots
-fig, axes = plt.subplots(num_rows, num_cols)
+# Create subplots in the grid
+subplots = []
+for i in range(3):
+    for j in range(3):
+        subplots.append(fig.add_subplot(gs[i-1, j-1]))
 
-# Add content to the subplots (e.g., plot data)
-for i in range(num_rows):
-    for j in range(num_cols):
-        ax = axes[i, j]
-        ax.plot([1, 2, 3], [4, 5, 6])  # Example plot data
+# Create subplots for row labels
+row_labels = [fig.add_subplot(gs[i, 0]) for i in range(3)]
 
-        # Add row and column labels
-        ax.text(0.5, 0.5, f'Row {i+1}\nCol {j+1}', ha='center', va='center', transform=ax.transAxes)
+# Create subplots for column labels
+col_labels = [fig.add_subplot(gs[0, i]) for i in range(3)]
 
-# Add overall row and column labels
-for i in range(num_rows):
-    fig.text(0.06, (i+0.5) / num_rows, f'Row {i+1}', ha='center', va='center', rotation='vertical')
-for j in range(num_cols):
-    fig.text((j+0.5) / num_cols, 0.94, f'Col {j+1}', ha='center', va='center')
+# Set row and column labels
+row_labels[0].set_ylabel('Row 1')
+row_labels[1].set_ylabel('Row 2')
+row_labels[2].set_ylabel('Row 3')
 
-# Adjust the layout
-# fig.tight_layout()
+col_labels[0].set_xlabel('Column 1')
+col_labels[1].set_xlabel('Column 2')
+col_labels[2].set_xlabel('Column 3')
+
+# Set titles for subplots
+for i, ax in enumerate(subplots):
+    ax.set_title(f'Plot {i+1}')
+
+# Add plot content
+for ax in subplots:
+    ax.plot([1, 2, 3], [4, 5, 6])
+
+# Adjust spacing
+plt.tight_layout()
 
 # Show the plot
 plt.show()
