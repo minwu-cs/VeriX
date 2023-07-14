@@ -16,6 +16,7 @@ parser.add_argument('--traversal_mode', type=str, default='sensitivity_reversal'
 parser.add_argument('--epsilon', type=float, default=0.1)
 parser.add_argument('--path', type=str, default='mnist-models-comparison/')
 parser.add_argument('--test', type=bool, default=False)
+parser.add_argument('--name', type=str, default='explanation_comparisons')
 args = parser.parse_args()
 
 traversal_mode = args.traversal_mode
@@ -39,17 +40,27 @@ x_sample = x_test[sample_indices]
 y_sample = y_test[sample_indices]
 
 # Load pre-trained networks
+# networks_path = 'networks/'
+# keras_models = []
+# model_names = []
+# for filename in os.listdir(networks_path):
+#     if filename.startswith('mnist') and filename.endswith('.h5'):
+#         onnx_path = networks_path + filename[:-3] + '.onnx'
+#         if not os.path.exists(onnx_path):
+#             continue
+#         keras_model_path = networks_path + filename
+#         keras_models.append(keras_model_path)
+#         model_names.append(filename[:-3])
+
 networks_path = 'networks/'
 keras_models = []
-model_names = []
-for filename in os.listdir(networks_path):
-    if filename.startswith('mnist') and filename.endswith('.h5'):
-        onnx_path = networks_path + filename[:-3] + '.onnx'
-        if not os.path.exists(onnx_path):
-            continue
-        keras_model_path = networks_path + filename
-        keras_models.append(keras_model_path)
-        model_names.append(filename[:-3])
+model_names = ['mnist-10x2', 'mnist-simple-cnn']
+for model_name in model_names:
+    keras_model_path = networks_path + model_name + '.h5'
+    onnx_model_path = networks_path + model_name + '.onnx'
+    if not os.path.exists(onnx_model_path) and os.path.exists(keras_model_path):
+        raise Exception('model not found')
+    keras_models.append(keras_model_path)
 
 # For each network, produce explanations on the set of images
 results = {}
@@ -71,6 +82,7 @@ for model_index in range(num_models):
             # Generate explanation
             solver = VeriX(keras_models[model_index], original_image, y_test[sample_index], seed=args.seed)
             sensitivity = solver.add_traversal_order(traversal_mode)
+            print("Generating explanation for sample " + str(sample_index) + ", network " + model_name)
             sat_set, unsat_set, timeout_set = solver.generate_explanation(traversal_mode, epsilon, 60, verbosity=False)
         else:
             solver = VeriX(keras_models[2], original_image, y_test[sample_index], seed=args.seed)
@@ -140,5 +152,5 @@ for i in range(num_models):
 
 fig.tight_layout()
 fig.subplots_adjust(top=0.95)
-fig.savefig('%s/%s_linf%g_explanation_comparisons.png' % (result_path, traversal_mode, epsilon))
+fig.savefig('%s/%s_linf%g_%s.png' % (result_path, traversal_mode, epsilon, args.name))
 plt.close(fig)
