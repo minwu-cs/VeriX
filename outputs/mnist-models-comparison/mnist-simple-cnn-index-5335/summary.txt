@@ -3,5 +3,5 @@ index: 5335
 traversal mode: sensitivity_reversal
 epsilon: 0.050000
 sat set size: 0
-unsat set size: 0
-timeout set size: 0
+unsat set size: 707
+timeout set size: 77
