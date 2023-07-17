@@ -1,0 +1,7 @@
+model: mnist-10x2
+index: 1033
+traversal mode: sensitivity_reversal
+epsilon: 0.050000
+sat set size: 169
+unsat set size: 615
+timeout set size: 0

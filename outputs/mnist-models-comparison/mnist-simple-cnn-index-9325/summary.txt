@@ -1,0 +1,7 @@
+model: mnist-simple-cnn
+index: 9325
+traversal mode: sensitivity_reversal
+epsilon: 0.050000
+sat set size: 2
+unsat set size: 782
+timeout set size: 0
