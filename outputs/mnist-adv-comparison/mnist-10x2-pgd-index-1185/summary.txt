@@ -1,0 +1,7 @@
+model: mnist-10x2-pgd
+index: 1185
+traversal mode: sensitivity_reversal
+epsilon: 0.050000
+sat set size: 184
+unsat set size: 600
+timeout set size: 0

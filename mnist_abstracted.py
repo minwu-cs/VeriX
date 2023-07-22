@@ -14,7 +14,6 @@ from utils import suppress_stdout, plot_figure
 from verix import VeriX
 
 
-TIMEOUT = 60
 directory = 'networks/'
 if not os.path.exists(directory):
     os.mkdir(directory)
@@ -24,6 +23,7 @@ parser.add_argument('--dataset', type=str, default='mnist')
 parser.add_argument('--network', type=str, default='mnist-10x2')
 parser.add_argument('--index', type=int, default=0)
 parser.add_argument('--epsilon', type=float, default=0.1)
+parser.add_argument('--timeout', type=int, default=60)
 parser.add_argument('--verbosity', type=bool, default=False)
 args = parser.parse_args()
 
@@ -31,8 +31,9 @@ dataset = args.dataset
 model_name = args.network
 index = args.index
 epsilon = args.epsilon
+timeout = args.timeout
 
-result_dir = 'outputs/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, TIMEOUT, epsilon)
+result_dir = 'outputs/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, timeout, epsilon)
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
@@ -49,7 +50,7 @@ y = y_test
 keras_model_path = directory + model_name + '.h5'
 solver = VeriX(keras_model_path, x[index], y[index])
 solver.add_traversal_order('sensitivity_reversal')
-sat_set, unsat_set, timeout_set = solver.generate_explanation('sensitivity_reversal', epsilon, verbosity=args.verbosity)
+sat_set, unsat_set, timeout_set = solver.generate_explanation('sensitivity_reversal', epsilon=epsilon, timeout=timeout, verbosity=args.verbosity)
 
 image = x[solver.pred].flatten()
 mask = np.zeros(image.shape).astype(bool)
