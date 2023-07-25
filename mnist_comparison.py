@@ -54,7 +54,7 @@ y_sample = y_test[sample_indices]
 
 networks_path = 'networks/'
 keras_models = []
-model_names = ['mnist-10x2', 'mnist-simple-cnn']
+model_names = ['mnist-10x2-normal', 'mnist-10x2-pgd', 'mnist-100x2-normal', 'mnist-100x2-pgd']
 for model_name in model_names:
     keras_model_path = networks_path + model_name + '.h5'
     onnx_model_path = networks_path + model_name + '.onnx'
@@ -137,10 +137,6 @@ for model_index in range(num_models):
         ax.axis('off')
         ax.imshow(masked_image, interpolation='nearest')
 
-# save results in the same place
-with open('results.pickle', 'wb') as f:
-    pickle.dump(results, f)
-
 # plot summary image
 # row names
 for i in range(num_samples):
@@ -154,3 +150,8 @@ fig.tight_layout()
 fig.subplots_adjust(top=0.95)
 fig.savefig('%s/%s_linf%g_%s.png' % (result_path, traversal_mode, epsilon, args.name))
 plt.close(fig)
+
+# save results in the same place
+with open(args.name + 'results.pickle', 'wb') as f:
+    pickle.dump(results, f)
+
