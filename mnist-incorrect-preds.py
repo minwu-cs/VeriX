@@ -1,16 +1,11 @@
 import os
-import time
-import random
 import argparse
 import numpy as np
 import tensorflow as tf
-import tensorflow_ranking as tfr
 from keras.datasets import mnist
 from keras.models import load_model
 from skimage.color import label2rgb
-import matplotlib.pyplot as plt
-from maraboupy import Marabou
-from utils import suppress_stdout, plot_figure
+from utils import plot_figure
 from verix import VeriX
 
 
@@ -32,14 +27,12 @@ epsilon = args.epsilon
 timeout = args.timeout
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
-x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+# x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
 x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
-y_train = tf.keras.utils.to_categorical(y_train, 10)
+# y_train = tf.keras.utils.to_categorical(y_train, 10)
 y_test = tf.keras.utils.to_categorical(y_test, 10)
-x_train = x_train.astype('float32') / 255
+# x_train = x_train.astype('float32') / 255
 x_test = x_test.astype('float32') / 255
-x = x_test
-y = y_test
 
 keras_model_path = directory + model_name + '.h5'
 keras_model = load_model(keras_model_path)
