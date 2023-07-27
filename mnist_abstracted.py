@@ -38,26 +38,24 @@ if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
-x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
+# x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
 x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
-y_train = tf.keras.utils.to_categorical(y_train, 10)
+# y_train = tf.keras.utils.to_categorical(y_train, 10)
 y_test = tf.keras.utils.to_categorical(y_test, 10)
-x_train = x_train.astype('float32') / 255
+# x_train = x_train.astype('float32') / 255
 x_test = x_test.astype('float32') / 255
-x = x_test
-y = y_test
 
 keras_model_path = directory + model_name + '.h5'
-solver = VeriX(keras_model_path, x[index], y[index])
+solver = VeriX(keras_model_path, x_test[index], y_test[index])
 solver.add_traversal_order('sensitivity_reversal')
 sat_set, unsat_set, timeout_set = solver.generate_explanation('sensitivity_reversal', epsilon=epsilon, timeout=timeout, verbosity=args.verbosity)
 
-image = x[solver.pred].flatten()
+image = x_test[solver.pred].flatten()
 mask = np.zeros(image.shape).astype(bool)
 mask[sat_set] = True
 mask[timeout_set] = True
 
-plot_figure(image=label2rgb(mask.reshape(28, 28), x[index].reshape(28, 28),
+plot_figure(image=label2rgb(mask.reshape(28, 28), x_test[index].reshape(28, 28),
                             # colors=[[1, 1, 0]],
                             # colors=[[128 / 255, 1, 0]],
                             colors=[[0, 1, 0]],
@@ -68,7 +66,7 @@ plot_figure(image=label2rgb(mask.reshape(28, 28), x[index].reshape(28, 28),
 mask = np.zeros(image.shape).astype(bool)
 mask[timeout_set] = True
 
-plot_figure(image=label2rgb(mask.reshape(28, 28), x[index].reshape(28, 28),
+plot_figure(image=label2rgb(mask.reshape(28, 28), x_test[index].reshape(28, 28),
                             # colors=[[1, 1, 0]],
                             # colors=[[128 / 255, 1, 0]],
                             colors=[[0, 1, 0]],
