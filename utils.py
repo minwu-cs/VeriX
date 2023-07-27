@@ -8,7 +8,7 @@ import numpy as np
 from skimage.color import label2rgb
 
 libc = ctypes.CDLL(None)
-c_stdout = ctypes.c_void_p.in_dll(libc, 'stdout')
+c_stdout = ctypes.c_void_p.in_dll(libc, '__stdoutp')
 
 
 @contextmanager
