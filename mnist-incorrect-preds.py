@@ -47,6 +47,7 @@ logits = keras_model.predict(x_test)
 preds = np.argmax(logits, axis=1)
 correct_preds = np.argmax(y_test, axis=1)
 incorrect_indices = np.where(preds != correct_preds)[0]
+np.savetxt('outputs/incorrect-preds/%s-incorrect-indices.txt' % (model_name), incorrect_indices, fmt='%d')
 
 for index in incorrect_indices[:100]:
     result_dir = 'outputs/incorrect-preds/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, timeout, epsilon)
