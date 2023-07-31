@@ -46,7 +46,13 @@ y_test = tf.keras.utils.to_categorical(y_test, 10)
 x_test = x_test.astype('float32') / 255
 
 keras_model_path = directory + model_name + '.h5'
+print(result_dir)
+plot_figure(image=x_test[index],
+            path='%s/index-%d-original.png' % (result_dir, index),
+            cmap='gray')
 solver = VeriX(keras_model_path, x_test[index], y_test[index])
+solver.get_pixel_sensitivities(transformation=lambda a: 1 - a,
+                               plot_path='%s/index-%d-%s-sensitivity.png' % (result_dir, index, model_name))
 solver.add_traversal_order('sensitivity_reversal')
 sat_set, unsat_set, timeout_set = solver.generate_explanation('sensitivity_reversal', epsilon=epsilon, timeout=timeout, verbosity=args.verbosity)
 
