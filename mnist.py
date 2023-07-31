@@ -36,6 +36,7 @@ parser.add_argument('--timeout', type=int, default=60)
 parser.add_argument('--network', type=str, default='mnist-10x2')
 parser.add_argument('--index', type=int, default=0)
 parser.add_argument('--epsilon', type=float, default=0.1)
+parser.add_argument('--load_dir', type=str, default=None)
 args = parser.parse_args()
 
 timeout = args.timeout
@@ -47,8 +48,6 @@ epsilon = args.epsilon
 result_dir = 'outputs/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, timeout, epsilon)
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
-print(result_dir)
-
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
@@ -114,12 +113,20 @@ inputVars = sorted_index
 
 image = x[index].flatten()
 
-unsat_set = []
-sat_set = []
-timeout_set = []
+load_dir = args.load_dir
+if load_dir is None:
+    unsat_set = []
+    sat_set = []
+    timeout_set = []
+    start = 0
+else:
+    unsat_set = np.loadtxt(load_dir + f'index-{index}-{model_name}-linf{epsilon}-unsat.txt', dtype='int', ndmin=1).tolist()
+    sat_set = np.loadtxt(load_dir + f'index-{index}-{model_name}-linf{epsilon}-sat.txt', dtype='int', ndmin=1).tolist()
+    timeout_set = np.loadtxt(load_dir + f'index-{index}-{model_name}-linf{epsilon}-timeout.txt', dtype='int', ndmin=1).tolist()
+    start = len(unsat_set) + len(sat_set) + len(timeout_set)
 
 marabou_time = []
-for i in range(len(inputVars)):
+for i in range(start, len(inputVars)):
     pixel = inputVars[i]
     for j in range(10):
         if j != label:
@@ -174,13 +181,12 @@ for i in range(len(inputVars)):
         #             cmap='gray')
     print(f'unsat size: {len(unsat_set)}, sat size: {len(sat_set)}, timeout size: {len(timeout_set)}')
 
-    if True: # i % 100 == 0:
-        np.savetxt('%s/index-%d-%s-linf%g-unsat.txt' % (result_dir, index, model_name, epsilon),
-                   unsat_set, fmt='%d')
-        np.savetxt('%s/index-%d-%s-linf%g-sat.txt' % (result_dir, index, model_name, epsilon),
-                   sat_set, fmt='%d')
-        np.savetxt('%s/index-%d-%s-linf%g-timeout.txt' % (result_dir, index, model_name, epsilon),
-                   timeout_set, fmt='%d')
+    np.savetxt('%s/index-%d-%s-linf%g-unsat.txt' % (result_dir, index, model_name, epsilon),
+               unsat_set, fmt='%d')
+    np.savetxt('%s/index-%d-%s-linf%g-sat.txt' % (result_dir, index, model_name, epsilon),
+               sat_set, fmt='%d')
+    np.savetxt('%s/index-%d-%s-linf%g-timeout.txt' % (result_dir, index, model_name, epsilon),
+               timeout_set, fmt='%d')
 
 explanation_toc = time.time()
 
