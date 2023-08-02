@@ -55,7 +55,7 @@ correct_indices = np.where(preds == correct_preds)[0]
 np.savetxt('%s%s-incorrect-indices.txt' % (output_path, model_name), incorrect_indices, fmt='%d')
 np.savetxt('%s%s-correct-indices.txt' % (output_path, model_name), correct_indices, fmt='%d')
 
-indices = correct_indices[:100]  # np.concatenate((incorrect_indices, correct_indices))
+indices = np.concatenate((incorrect_indices[:100], correct_indices[:100]))
 for index in indices:
     result_dir = '%sindex-%d-%s-%ds-heuristic-linf%g' % (output_path, index, model_name, timeout, epsilon)
     if not os.path.exists(result_dir):
