@@ -25,6 +25,7 @@ parser.add_argument('--index', type=int, default=0)
 parser.add_argument('--epsilon', type=float, default=0.1)
 parser.add_argument('--timeout', type=int, default=60)
 parser.add_argument('--verbosity', type=bool, default=False)
+parser.add_argument('--output_path', type=str, default='outputs')
 args = parser.parse_args()
 
 dataset = args.dataset
@@ -32,8 +33,12 @@ model_name = args.network
 index = args.index
 epsilon = args.epsilon
 timeout = args.timeout
+output_path = args.output_path
 
-result_dir = 'outputs/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, timeout, epsilon)
+if not os.path.exists(output_path):
+    os.mkdir(output_path)
+
+result_dir = '%s/index-%d-%s-%ds-heuristic-linf%g' % (output_path, index, model_name, timeout, epsilon)
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
