@@ -15,7 +15,6 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='gtsrb')
 parser.add_argument('--network', type=str, default='gtsrb-10x2-normal')
-parser.add_argument('--index', type=int, default=0)
 parser.add_argument('--epsilon', type=float, default=0.02)
 parser.add_argument('--traverse', type=str, default='heuristic')
 parser.add_argument('--seed', type=int, default=0)
@@ -26,7 +25,6 @@ args = parser.parse_args()
 
 dataset = args.dataset
 model_name = args.network
-index = args.index
 epsilon = args.epsilon
 traverse = args.traverse
 seed = args.seed
@@ -70,17 +68,6 @@ def plot_figure(image, path):
     plt.savefig(path, bbox_inches='tight')
     plt.close(fig)
 
-if traverse == 'heuristic':
-    result_dir = '%s/index-%d-%s-%ds-%s-linf%g' % (output_path, index, model_name, timeout, traverse, epsilon)
-elif traverse == 'random':
-    result_dir = '%s/index-%d-%s-%ds-%s-seed-%d-linf%g' % (output_path, index, model_name, timeout, traverse, seed, epsilon)
-else:
-    print('traversal incorrect.')
-    exit()
-
-if not os.path.exists(result_dir):
-    os.mkdir(result_dir)
-
 gtsrb_path = 'train_networks/gtsrb.pickle'
 x_test, y_test = load_gtsrb(gtsrb_path=gtsrb_path)
 
@@ -97,7 +84,7 @@ correct_indices = np.where(preds == y_test)[0]
 np.savetxt('%s/%s-incorrect-indices.txt' % (output_path, model_name), incorrect_indices, fmt='%d')
 np.savetxt('%s/%s-correct-indices.txt' % (output_path, model_name), correct_indices, fmt='%d')
 
-indices = np.concatenate((incorrect_indices[:100], correct_indices[:100]))
+indices = np.concatenate((incorrect_indices[73:100], correct_indices[:100]))
 
 
 # incorrect_indices = np.where(preds != y_test)[0]
@@ -105,6 +92,18 @@ for index in indices:
     image = x_test[index]
     label = y_test[index]
     orig_label = get_gtsrb_label(index=label)
+
+    if traverse == 'heuristic':
+        result_dir = '%s/index-%d-%s-%ds-%s-linf%g' % (output_path, index, model_name, timeout, traverse, epsilon)
+    elif traverse == 'random':
+        result_dir = '%s/index-%d-%s-%ds-%s-seed-%d-linf%g' % (
+        output_path, index, model_name, timeout, traverse, seed, epsilon)
+    else:
+        print('traversal incorrect.')
+        exit()
+
+    if not os.path.exists(result_dir):
+        os.mkdir(result_dir)
 
     pred_label = get_gtsrb_label(index=preds[index])
     path = '%s/index-%d-original-%d-[%s]-predicted-as-%d-[%s].png' % (

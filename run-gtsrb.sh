@@ -6,12 +6,8 @@ echo "Bash version ${BASH_VERSION}..."
 #  for e in $(seq 0.1 0.1 1)
 #  for e in $(seq 0.01 0.01 0.09)
 #  for e in $(seq 1)
-model=("gtsrb-10x2-normal" "gtsrb-30x2-normal" "gtsrb-30x2-pgd")
-epsilon=(0.05)
-for i in $(seq 0 1 200)
+model=("gtsrb-30x2-normal" "gtsrb-30x2-pgd")
+for m in "${model[@]}"
 do
-  for m in "${model[@]}"
-  do
-    python gtsrb_incorrect_preds.py --network="$m" --epsilon="0.02" --index="$i" --output_path=gtsrb_outputs/"$m"
-  done
+  python gtsrb_incorrect_preds.py --network="$m" --epsilon=0.005 --output_path=gtsrb_outputs/"$m"
 done
