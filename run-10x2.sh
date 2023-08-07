@@ -8,10 +8,10 @@ echo "Bash version ${BASH_VERSION}..."
 #  for e in $(seq 1)
 model=("mnist-10x2-normal" "mnist-10x2-pgd")
 epsilon=(0.05)
-for i in $(seq 0 1 99)
+for i in $(seq 100 1 149)
 do
   for m in "${model[@]}"
   do
-    python mnist_abstracted.py --network="$m" --epsilon="0.05" --index="$i"
+    python mnist_abstracted.py --network="$m" --epsilon="0.05" --index="$i" --output_path="$m"
   done
 done

@@ -1,2 +1,23 @@
 Start timing simple cnn explanation...
-Generating explanation for index 0)
+Generating explanation for index 0
+Explanation for index 0 generated!
+Elapsed: 19hrs 5min 5sec
+Generating explanation for index 1
+Explanation for index 1 generated!
+Elapsed: 29hrs 54min 14sec
+Generating explanation for index 2
+Explanation for index 2 generated!
+Elapsed: 41hrs 19min 22sec
+Generating explanation for index 3
+Explanation for index 3 generated!
+Elapsed: 50hrs 0min 54sec
+Generating explanation for index 4
+Explanation for index 4 generated!
+Elapsed: 81hrs 13min 6sec
+Generating explanation for index 5
+Explanation for index 5 generated!
+Elapsed: 92hrs 7min 14sec
+Generating explanation for index 6
+Explanation for index 6 generated!
+Elapsed: 106hrs 23min 55sec
+Generating explanation for index 7
