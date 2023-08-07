@@ -21,3 +21,11 @@ Generating explanation for index 6
 Explanation for index 6 generated!
 Elapsed: 106hrs 23min 55sec
 Generating explanation for index 7
+Explanation for index 7 generated!
+Elapsed: 131hrs 32min 46sec
+Generating explanation for index 8
+Explanation for index 8 generated!
+Elapsed: 138hrs 52min 28sec
+Generating explanation for index 9
+Explanation for index 9 generated!
+Elapsed: 142hrs 11min 7sec
