@@ -36,6 +36,7 @@ parser.add_argument('--timeout', type=int, default=60)
 parser.add_argument('--network', type=str, default='mnist-10x2')
 parser.add_argument('--index', type=int, default=0)
 parser.add_argument('--epsilon', type=float, default=0.1)
+parser.add_argument('--result_dir', type=str, default='outputs')
 parser.add_argument('--load_dir', type=str, default=None)
 args = parser.parse_args()
 
@@ -45,7 +46,7 @@ model_name = args.network
 index = args.index
 epsilon = args.epsilon
 
-result_dir = 'outputs/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, timeout, epsilon)
+result_dir = args.result_dir + '/index-%d-%s-%ds-heuristic-linf%g' % (index, model_name, timeout, epsilon)
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
