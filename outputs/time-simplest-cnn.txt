@@ -1,0 +1,637 @@
+Start timing simplest cnn explanation...
+Generating explanation for index 0)
+Explanation for index 0 generated!
+Elapsed: 0hrs 0min 4sec
+Generating explanation for index 1)
+Explanation for index 1 generated!
+Start timing simplest cnn explanation...
+Generating explanation for index 0)
+Explanation for index 0 generated!
+Elapsed: 0hrs 0min 4sec
+Generating explanation for index 1)
+Explanation for index 1 generated!
+Elapsed: 0hrs 0min 8sec
+Generating explanation for index 2)
+Explanation for index 2 generated!
+Elapsed: 0hrs 0min 12sec
+Generating explanation for index 3)
+Explanation for index 3 generated!
+Start timing simplest cnn explanation...
+Generating explanation for index 0)
+Explanation for index 0 generated!
+Elapsed: 0hrs 0min 7sec
+Generating explanation for index 1)
+Explanation for index 1 generated!
+Elapsed: 0hrs 0min 10sec
+Generating explanation for index 2)
+Start timing simplest cnn explanation...
+Generating explanation for index 0)
+Explanation for index 0 generated!
+Elapsed: 0hrs 14min 51sec
+Generating explanation for index 1)
+Explanation for index 1 generated!
+Elapsed: 0hrs 30min 8sec
+Generating explanation for index 2)
+Explanation for index 2 generated!
+Elapsed: 0hrs 43min 43sec
+Generating explanation for index 3)
+Explanation for index 3 generated!
+Elapsed: 0hrs 58min 8sec
+Generating explanation for index 4)
+Explanation for index 4 generated!
+Elapsed: 1hrs 14min 39sec
+Generating explanation for index 5)
+Explanation for index 5 generated!
+Elapsed: 1hrs 30min 3sec
+Generating explanation for index 6)
+Explanation for index 6 generated!
+Elapsed: 1hrs 45min 23sec
+Generating explanation for index 7)
+Explanation for index 7 generated!
+Elapsed: 2hrs 0min 12sec
+Generating explanation for index 8)
+Explanation for index 8 generated!
+Elapsed: 2hrs 0min 17sec
+Generating explanation for index 9)
+Explanation for index 9 generated!
+Elapsed: 2hrs 15min 3sec
+Start timing simplest cnn explanation...
+Generating explanation for index 10)
+Explanation for index 10 generated!
+Elapsed: 0hrs 1min 1sec
+Generating explanation for index 11)
+Start timing simplest cnn explanation...
+Generating explanation for index 0)
+Explanation for index 11 generated!
+Elapsed: 0hrs 3min 37sec
+Generating explanation for index 12)
+Explanation for index 12 generated!
+Elapsed: 0hrs 4min 10sec
+Generating explanation for index 13)
+Start timing simplest cnn explanation...
+Generating explanation for index 0)
+Explanation for index 13 generated!
+Elapsed: 0hrs 18min 48sec
+Generating explanation for index 14)
+Explanation for index 0 generated!
+Elapsed: 0hrs 14min 24sec
+Generating explanation for index 1)
+Explanation for index 14 generated!
+Elapsed: 0hrs 33min 31sec
+Generating explanation for index 15)
+Explanation for index 1 generated!
+Elapsed: 0hrs 29min 34sec
+Generating explanation for index 2)
+Explanation for index 15 generated!
+Elapsed: 0hrs 47min 18sec
+Generating explanation for index 16)
+Explanation for index 2 generated!
+Elapsed: 0hrs 43min 51sec
+Generating explanation for index 3)
+Explanation for index 16 generated!
+Elapsed: 1hrs 2min 34sec
+Generating explanation for index 17)
+Explanation for index 3 generated!
+Elapsed: 0hrs 59min 1sec
+Generating explanation for index 4)
+Explanation for index 17 generated!
+Elapsed: 1hrs 16min 53sec
+Generating explanation for index 18)
+Explanation for index 4 generated!
+Elapsed: 1hrs 15min 21sec
+Generating explanation for index 5)
+Explanation for index 18 generated!
+Elapsed: 1hrs 29min 37sec
+Generating explanation for index 19)
+Explanation for index 5 generated!
+Elapsed: 1hrs 31min 8sec
+Generating explanation for index 6)
+Explanation for index 19 generated!
+Elapsed: 1hrs 45min 35sec
+Generating explanation for index 20)
+Explanation for index 6 generated!
+Elapsed: 1hrs 47min 21sec
+Generating explanation for index 7)
+Explanation for index 20 generated!
+Elapsed: 2hrs 1min 10sec
+Generating explanation for index 21)
+Explanation for index 7 generated!
+Elapsed: 2hrs 2min 27sec
+Generating explanation for index 8)
+Explanation for index 8 generated!
+Elapsed: 2hrs 2min 32sec
+Generating explanation for index 9)
+Explanation for index 21 generated!
+Elapsed: 2hrs 16min 31sec
+Generating explanation for index 22)
+Explanation for index 9 generated!
+Elapsed: 2hrs 17min 28sec
+Generating explanation for index 10)
+Explanation for index 22 generated!
+Elapsed: 2hrs 31min 9sec
+Generating explanation for index 23)
+Explanation for index 10 generated!
+Elapsed: 2hrs 32min 8sec
+Generating explanation for index 11)
+Explanation for index 23 generated!
+Elapsed: 2hrs 46min 39sec
+Generating explanation for index 24)
+Explanation for index 11 generated!
+Elapsed: 2hrs 48min 55sec
+Generating explanation for index 12)
+Explanation for index 24 generated!
+Elapsed: 3hrs 2min 42sec
+Generating explanation for index 25)
+Explanation for index 12 generated!
+Elapsed: 3hrs 5min 6sec
+Generating explanation for index 13)
+Explanation for index 25 generated!
+Elapsed: 3hrs 16min 46sec
+Generating explanation for index 26)
+Explanation for index 13 generated!
+Elapsed: 3hrs 19min 0sec
+Generating explanation for index 14)
+Explanation for index 26 generated!
+Elapsed: 3hrs 31min 59sec
+Generating explanation for index 27)
+Explanation for index 14 generated!
+Elapsed: 3hrs 33min 48sec
+Generating explanation for index 15)
+Explanation for index 27 generated!
+Elapsed: 3hrs 47min 44sec
+Generating explanation for index 28)
+Explanation for index 15 generated!
+Elapsed: 3hrs 47min 25sec
+Generating explanation for index 16)
+Explanation for index 28 generated!
+Elapsed: 4hrs 2min 5sec
+Generating explanation for index 29)
+Explanation for index 16 generated!
+Elapsed: 4hrs 2min 26sec
+Generating explanation for index 17)
+Explanation for index 29 generated!
+Elapsed: 4hrs 18min 44sec
+Generating explanation for index 30)
+Explanation for index 17 generated!
+Elapsed: 4hrs 17min 11sec
+Generating explanation for index 18)
+Explanation for index 30 generated!
+Elapsed: 4hrs 33min 56sec
+Generating explanation for index 31)
+Explanation for index 18 generated!
+Elapsed: 4hrs 29min 53sec
+Generating explanation for index 19)
+Explanation for index 31 generated!
+Elapsed: 4hrs 48min 9sec
+Generating explanation for index 32)
+Explanation for index 19 generated!
+Elapsed: 4hrs 45min 45sec
+Generating explanation for index 20)
+Explanation for index 32 generated!
+Elapsed: 5hrs 3min 1sec
+Generating explanation for index 33)
+Explanation for index 33 generated!
+Elapsed: 5hrs 3min 7sec
+Generating explanation for index 34)
+Explanation for index 20 generated!
+Elapsed: 5hrs 1min 27sec
+Generating explanation for index 21)
+Explanation for index 34 generated!
+Elapsed: 5hrs 17min 50sec
+Generating explanation for index 35)
+Explanation for index 21 generated!
+Elapsed: 5hrs 16min 38sec
+Generating explanation for index 22)
+Explanation for index 35 generated!
+Elapsed: 5hrs 33min 1sec
+Generating explanation for index 36)
+Explanation for index 22 generated!
+Elapsed: 5hrs 30min 59sec
+Generating explanation for index 23)
+Explanation for index 36 generated!
+Elapsed: 5hrs 47min 34sec
+Generating explanation for index 37)
+Explanation for index 23 generated!
+Elapsed: 5hrs 46min 22sec
+Generating explanation for index 24)
+Explanation for index 37 generated!
+Elapsed: 6hrs 3min 41sec
+Generating explanation for index 38)
+Explanation for index 24 generated!
+Elapsed: 6hrs 1min 57sec
+Generating explanation for index 25)
+Explanation for index 38 generated!
+Elapsed: 6hrs 16min 25sec
+Generating explanation for index 39)
+Explanation for index 25 generated!
+Elapsed: 6hrs 16min 12sec
+Generating explanation for index 26)
+Explanation for index 39 generated!
+Elapsed: 6hrs 31min 57sec
+Generating explanation for index 40)
+Explanation for index 26 generated!
+Elapsed: 6hrs 31min 53sec
+Generating explanation for index 27)
+Explanation for index 40 generated!
+Elapsed: 6hrs 47min 4sec
+Generating explanation for index 41)
+Explanation for index 27 generated!
+Elapsed: 6hrs 48min 1sec
+Generating explanation for index 28)
+Explanation for index 41 generated!
+Elapsed: 7hrs 3min 44sec
+Generating explanation for index 42)
+Explanation for index 28 generated!
+Elapsed: 7hrs 2min 28sec
+Generating explanation for index 29)
+Explanation for index 42 generated!
+Elapsed: 7hrs 19min 30sec
+Generating explanation for index 43)
+Explanation for index 29 generated!
+Elapsed: 7hrs 19min 31sec
+Generating explanation for index 30)
+Explanation for index 43 generated!
+Elapsed: 7hrs 34min 53sec
+Generating explanation for index 44)
+Explanation for index 30 generated!
+Elapsed: 7hrs 35min 1sec
+Generating explanation for index 31)
+Explanation for index 44 generated!
+Elapsed: 7hrs 50min 50sec
+Generating explanation for index 45)
+Explanation for index 31 generated!
+Elapsed: 7hrs 49min 40sec
+Generating explanation for index 32)
+Explanation for index 45 generated!
+Elapsed: 8hrs 6min 16sec
+Generating explanation for index 46)
+Explanation for index 32 generated!
+Elapsed: 8hrs 5min 0sec
+Generating explanation for index 33)
+Explanation for index 33 generated!
+Elapsed: 8hrs 5min 5sec
+Generating explanation for index 34)
+Explanation for index 46 generated!
+Elapsed: 8hrs 20min 2sec
+Generating explanation for index 47)
+Explanation for index 34 generated!
+Elapsed: 8hrs 19min 55sec
+Generating explanation for index 35)
+Explanation for index 47 generated!
+Elapsed: 8hrs 33min 17sec
+Generating explanation for index 48)
+Explanation for index 35 generated!
+Elapsed: 8hrs 34min 59sec
+Generating explanation for index 36)
+Explanation for index 48 generated!
+Elapsed: 8hrs 48min 43sec
+Generating explanation for index 49)
+Explanation for index 36 generated!
+Elapsed: 8hrs 50min 3sec
+Generating explanation for index 37)
+Explanation for index 49 generated!
+Elapsed: 9hrs 4min 9sec
+Generating explanation for index 50)
+Explanation for index 37 generated!
+Elapsed: 9hrs 5min 40sec
+Generating explanation for index 38)
+Explanation for index 50 generated!
+Elapsed: 9hrs 19min 52sec
+Generating explanation for index 51)
+Explanation for index 38 generated!
+Elapsed: 9hrs 18min 11sec
+Generating explanation for index 39)
+Explanation for index 51 generated!
+Elapsed: 9hrs 33min 52sec
+Generating explanation for index 52)
+Explanation for index 39 generated!
+Elapsed: 9hrs 33min 52sec
+Generating explanation for index 40)
+Explanation for index 52 generated!
+Elapsed: 9hrs 47min 51sec
+Generating explanation for index 53)
+Explanation for index 40 generated!
+Elapsed: 9hrs 49min 31sec
+Generating explanation for index 41)
+Explanation for index 53 generated!
+Elapsed: 10hrs 3min 18sec
+Generating explanation for index 54)
+Explanation for index 41 generated!
+Elapsed: 10hrs 6min 38sec
+Generating explanation for index 42)
+Explanation for index 54 generated!
+Elapsed: 10hrs 16min 20sec
+Generating explanation for index 55)
+Explanation for index 42 generated!
+Elapsed: 10hrs 22min 49sec
+Generating explanation for index 43)
+Explanation for index 55 generated!
+Elapsed: 10hrs 31min 22sec
+Generating explanation for index 56)
+Explanation for index 43 generated!
+Elapsed: 10hrs 37min 53sec
+Generating explanation for index 44)
+Explanation for index 56 generated!
+Elapsed: 10hrs 46min 39sec
+Generating explanation for index 57)
+Explanation for index 44 generated!
+Elapsed: 10hrs 53min 30sec
+Generating explanation for index 45)
+Explanation for index 57 generated!
+Elapsed: 11hrs 2min 38sec
+Generating explanation for index 58)
+Explanation for index 45 generated!
+Elapsed: 11hrs 8min 54sec
+Generating explanation for index 46)
+Explanation for index 58 generated!
+Elapsed: 11hrs 18min 31sec
+Generating explanation for index 59)
+Explanation for index 46 generated!
+Elapsed: 11hrs 23min 10sec
+Generating explanation for index 47)
+Explanation for index 59 generated!
+Elapsed: 11hrs 31min 1sec
+Generating explanation for index 60)
+Explanation for index 47 generated!
+Elapsed: 11hrs 36min 21sec
+Generating explanation for index 48)
+Explanation for index 60 generated!
+Elapsed: 11hrs 45min 18sec
+Generating explanation for index 61)
+Explanation for index 48 generated!
+Elapsed: 11hrs 51min 30sec
+Generating explanation for index 49)
+Explanation for index 61 generated!
+Elapsed: 11hrs 59min 29sec
+Generating explanation for index 62)
+Explanation for index 49 generated!
+Elapsed: 12hrs 7min 29sec
+Generating explanation for index 50)
+Explanation for index 62 generated!
+Elapsed: 12hrs 13min 23sec
+Generating explanation for index 63)
+Explanation for index 63 generated!
+Elapsed: 12hrs 13min 29sec
+Generating explanation for index 64)
+Explanation for index 64 generated!
+Elapsed: 12hrs 27min 39sec
+Generating explanation for index 65)
+Explanation for index 50 generated!
+Elapsed: 12hrs 22min 17sec
+Generating explanation for index 51)
+Explanation for index 51 generated!
+Elapsed: 12hrs 37min 10sec
+Generating explanation for index 52)
+Explanation for index 65 generated!
+Elapsed: 12hrs 43min 2sec
+Generating explanation for index 66)
+Explanation for index 66 generated!
+Elapsed: 12hrs 43min 8sec
+Generating explanation for index 67)
+Explanation for index 52 generated!
+Elapsed: 12hrs 50min 39sec
+Generating explanation for index 53)
+Explanation for index 67 generated!
+Elapsed: 12hrs 59min 1sec
+Generating explanation for index 68)
+Explanation for index 53 generated!
+Elapsed: 13hrs 5min 37sec
+Generating explanation for index 54)
+Explanation for index 68 generated!
+Elapsed: 13hrs 14min 14sec
+Generating explanation for index 69)
+Explanation for index 54 generated!
+Elapsed: 13hrs 18min 11sec
+Generating explanation for index 55)
+Explanation for index 69 generated!
+Elapsed: 13hrs 28min 14sec
+Generating explanation for index 70)
+Explanation for index 55 generated!
+Elapsed: 13hrs 32min 18sec
+Generating explanation for index 56)
+Explanation for index 70 generated!
+Elapsed: 13hrs 42min 26sec
+Generating explanation for index 71)
+Explanation for index 56 generated!
+Elapsed: 13hrs 46min 43sec
+Generating explanation for index 57)
+Explanation for index 71 generated!
+Elapsed: 13hrs 56min 35sec
+Generating explanation for index 72)
+Explanation for index 57 generated!
+Elapsed: 14hrs 1min 48sec
+Generating explanation for index 58)
+Explanation for index 72 generated!
+Elapsed: 14hrs 11min 21sec
+Generating explanation for index 73)
+Explanation for index 58 generated!
+Elapsed: 14hrs 17min 20sec
+Generating explanation for index 59)
+Explanation for index 73 generated!
+Elapsed: 14hrs 26min 55sec
+Generating explanation for index 74)
+Explanation for index 59 generated!
+Elapsed: 14hrs 29min 49sec
+Generating explanation for index 60)
+Explanation for index 74 generated!
+Elapsed: 14hrs 43min 25sec
+Generating explanation for index 75)
+Explanation for index 60 generated!
+Elapsed: 14hrs 43min 56sec
+Generating explanation for index 61)
+Explanation for index 75 generated!
+Elapsed: 14hrs 58min 31sec
+Generating explanation for index 76)
+Explanation for index 61 generated!
+Elapsed: 14hrs 58min 21sec
+Generating explanation for index 62)
+Explanation for index 76 generated!
+Elapsed: 15hrs 14min 28sec
+Generating explanation for index 77)
+Explanation for index 62 generated!
+Elapsed: 15hrs 12min 26sec
+Generating explanation for index 63)
+Explanation for index 63 generated!
+Elapsed: 15hrs 12min 31sec
+Generating explanation for index 64)
+Explanation for index 77 generated!
+Elapsed: 15hrs 30min 53sec
+Generating explanation for index 78)
+Explanation for index 64 generated!
+Elapsed: 15hrs 27min 50sec
+Generating explanation for index 65)
+Explanation for index 78 generated!
+Elapsed: 15hrs 47min 21sec
+Generating explanation for index 79)
+Explanation for index 65 generated!
+Elapsed: 15hrs 44min 25sec
+Generating explanation for index 66)
+Explanation for index 66 generated!
+Elapsed: 15hrs 44min 31sec
+Generating explanation for index 67)
+Explanation for index 79 generated!
+Elapsed: 16hrs 1min 5sec
+Generating explanation for index 80)
+Explanation for index 67 generated!
+Elapsed: 15hrs 59min 6sec
+Generating explanation for index 68)
+Explanation for index 80 generated!
+Elapsed: 16hrs 15min 53sec
+Generating explanation for index 81)
+Explanation for index 68 generated!
+Elapsed: 16hrs 13min 54sec
+Generating explanation for index 69)
+Explanation for index 81 generated!
+Elapsed: 16hrs 29min 54sec
+Generating explanation for index 82)
+Explanation for index 69 generated!
+Elapsed: 16hrs 28min 2sec
+Generating explanation for index 70)
+Explanation for index 82 generated!
+Elapsed: 16hrs 43min 28sec
+Generating explanation for index 83)
+Explanation for index 70 generated!
+Elapsed: 16hrs 42min 11sec
+Generating explanation for index 71)
+Explanation for index 83 generated!
+Elapsed: 16hrs 59min 18sec
+Generating explanation for index 84)
+Explanation for index 71 generated!
+Elapsed: 16hrs 56min 40sec
+Generating explanation for index 72)
+Explanation for index 84 generated!
+Elapsed: 17hrs 14min 12sec
+Generating explanation for index 85)
+Explanation for index 72 generated!
+Elapsed: 17hrs 11min 15sec
+Generating explanation for index 73)
+Explanation for index 85 generated!
+Elapsed: 17hrs 29min 28sec
+Generating explanation for index 86)
+Explanation for index 73 generated!
+Elapsed: 17hrs 26min 25sec
+Generating explanation for index 74)
+Explanation for index 86 generated!
+Elapsed: 17hrs 43min 52sec
+Generating explanation for index 87)
+Explanation for index 74 generated!
+Elapsed: 17hrs 42min 13sec
+Generating explanation for index 75)
+Explanation for index 87 generated!
+Elapsed: 17hrs 58min 21sec
+Generating explanation for index 88)
+Explanation for index 75 generated!
+Elapsed: 17hrs 58min 6sec
+Generating explanation for index 76)
+Explanation for index 88 generated!
+Elapsed: 18hrs 12min 33sec
+Generating explanation for index 89)
+Explanation for index 76 generated!
+Elapsed: 18hrs 12min 58sec
+Generating explanation for index 77)
+Explanation for index 89 generated!
+Elapsed: 18hrs 27min 32sec
+Generating explanation for index 90)
+Explanation for index 77 generated!
+Elapsed: 18hrs 29min 2sec
+Generating explanation for index 78)
+Explanation for index 90 generated!
+Elapsed: 18hrs 43min 16sec
+Generating explanation for index 91)
+Explanation for index 78 generated!
+Elapsed: 18hrs 44min 46sec
+Generating explanation for index 79)
+Explanation for index 91 generated!
+Elapsed: 18hrs 57min 49sec
+Generating explanation for index 92)
+Explanation for index 79 generated!
+Elapsed: 18hrs 59min 3sec
+Generating explanation for index 80)
+Explanation for index 92 generated!
+Elapsed: 19hrs 11min 10sec
+Generating explanation for index 93)
+Explanation for index 80 generated!
+Elapsed: 19hrs 14min 16sec
+Generating explanation for index 81)
+Explanation for index 93 generated!
+Elapsed: 19hrs 25min 43sec
+Generating explanation for index 94)
+Explanation for index 81 generated!
+Elapsed: 19hrs 28min 33sec
+Generating explanation for index 82)
+Explanation for index 94 generated!
+Elapsed: 19hrs 41min 44sec
+Generating explanation for index 95)
+Explanation for index 82 generated!
+Elapsed: 19hrs 42min 36sec
+Generating explanation for index 83)
+Explanation for index 95 generated!
+Elapsed: 19hrs 56min 22sec
+Generating explanation for index 96)
+Explanation for index 83 generated!
+Elapsed: 19hrs 58min 37sec
+Generating explanation for index 84)
+Explanation for index 96 generated!
+Elapsed: 20hrs 11min 2sec
+Generating explanation for index 97)
+Explanation for index 84 generated!
+Elapsed: 20hrs 14min 20sec
+Generating explanation for index 85)
+Explanation for index 97 generated!
+Elapsed: 20hrs 25min 13sec
+Generating explanation for index 98)
+Explanation for index 85 generated!
+Elapsed: 20hrs 28min 55sec
+Generating explanation for index 86)
+Explanation for index 98 generated!
+Elapsed: 20hrs 39min 38sec
+Generating explanation for index 99)
+Explanation for index 86 generated!
+Elapsed: 20hrs 43min 21sec
+Generating explanation for index 87)
+Explanation for index 99 generated!
+Elapsed: 20hrs 54min 22sec
+Generating explanation for index 100)
+Explanation for index 87 generated!
+Elapsed: 20hrs 57min 51sec
+Generating explanation for index 88)
+Explanation for index 100 generated!
+Elapsed: 21hrs 8min 22sec
+Explanation for index 88 generated!
+Elapsed: 21hrs 11min 40sec
+Generating explanation for index 89)
+Explanation for index 89 generated!
+Elapsed: 21hrs 24min 59sec
+Generating explanation for index 90)
+Explanation for index 90 generated!
+Elapsed: 21hrs 38min 55sec
+Generating explanation for index 91)
+Explanation for index 91 generated!
+Elapsed: 21hrs 52min 24sec
+Generating explanation for index 92)
+Explanation for index 92 generated!
+Elapsed: 22hrs 5min 21sec
+Generating explanation for index 93)
+Explanation for index 93 generated!
+Elapsed: 22hrs 19min 29sec
+Generating explanation for index 94)
+Explanation for index 94 generated!
+Elapsed: 22hrs 34min 25sec
+Generating explanation for index 95)
+Explanation for index 95 generated!
+Elapsed: 22hrs 49min 10sec
+Generating explanation for index 96)
+Explanation for index 96 generated!
+Elapsed: 23hrs 2min 57sec
+Generating explanation for index 97)
+Explanation for index 97 generated!
+Elapsed: 23hrs 16min 9sec
+Generating explanation for index 98)
+Explanation for index 98 generated!
+Elapsed: 23hrs 29min 59sec
+Generating explanation for index 99)
+Explanation for index 99 generated!
+Elapsed: 23hrs 44min 16sec
+Generating explanation for index 100)
+Explanation for index 100 generated!
+Elapsed: 23hrs 57min 14sec
